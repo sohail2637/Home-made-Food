@@ -1,7 +1,14 @@
 import React from "react";
 // import AuthNavbar from "../Header";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container, Typography, Button, Box } from "@material-ui/core";
+import {
+  Grid,
+  Container,
+  Typography,
+  Button,
+  Box,
+  OutlinedInput,
+} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
 // import ReCAPTCHA from "react-google-recaptcha";
 import TextField from "@material-ui/core/TextField";
@@ -10,7 +17,7 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
+import { InputLabel } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,8 +49,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "10rem",
   },
   inputLbel: {
-    paddingLeft: "1rem",
-    fontSize: "12px",
+    paddingLeft: "0.8rem",
+    fontSize: "14px",
+    color: "#243028",
   },
 
   seeBtn: {
@@ -112,9 +120,13 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 7,
   },
   formControl: {
-    width:'100%',
-    margin: theme.spacing(1),
+    width: "100%",
+    // margin: theme.spacing(1),
     minWidth: 120,
+  },
+  uplodimg: {
+    width: "350px",
+    height: "350px",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -129,7 +141,9 @@ const SignupPage = () => {
     userName: "",
     email: "",
     password: "",
-    name: "hai",
+    mobileNumber: null,
+    image: null,
+    type: "hai",
   });
 
   const handleChange = (event) => {
@@ -139,6 +153,17 @@ const SignupPage = () => {
       [name]: event.target.value,
     });
     console.log({ [name]: event.target.value });
+  };
+  const onImageChange = (event) => {
+    event.preventDefault();
+    console.log(event.target.files[0].name);
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      setState({
+        ...state,
+        image: URL.createObjectURL(img),
+      });
+    }
   };
   const submationform = (event) => {
     event.preventDefault();
@@ -152,7 +177,10 @@ const SignupPage = () => {
             <Container maxWidth="md">
               {/* <div className={classes.Regform}> */}
               <form onSubmit={submationform}>
-                <Typography>
+                <Typography
+                  variant="h6"
+                  style={{ textAlign: "left", marginTop: "1rem" }}
+                >
                   <label for="fname" className={classes.inputLbel}>
                     First Name
                   </label>
@@ -161,12 +189,16 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  placeholder="First Name"
                   id="outlined-helperText"
                   variant="outlined"
                   // value={state.Firstname}
                 />
 
-                <Typography style={{ marginTop: "1rem" }}>
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Last Name
@@ -176,11 +208,15 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  placeholder="Last Name"
                   id="outlined-helperText"
                   variant="outlined"
                   // value={state.LastName}
                 />
-                <Typography style={{ marginTop: "1rem" }}>
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Username
@@ -190,11 +226,35 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  placeholder="User Name"
                   id="outlined-helperText"
                   variant="outlined"
                   // value={state.userName}
                 />
-                <Typography style={{ marginTop: "1rem" }}>
+
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
+                  <label for="fname" className={classes.inputLbel}>
+                    Mobile Number
+                  </label>
+                </Typography>
+                {/* ...........input mobile number......... */}
+                <OutlinedInput
+                  type="tel"
+                  fullWidth
+                  id="outlined-helperText"
+                  onChange={handleChange}
+                  name="phone"
+                  placeholder="Mobile number"
+                  pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
+                  variant="outlined"
+                />
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Email
@@ -204,11 +264,16 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  placeholder="Email"
                   id="outlined-helperText"
                   variant="outlined"
                   // value={state.email}
                 />
-                <Typography style={{ marginTop: "1rem" }}>
+
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Password
@@ -218,12 +283,18 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  placeholder="password"
+                  type="password"
                   id="outlined-helperText"
                   variant="outlined"
                   // value={state.password}
                 />
                 <FormControl className={classes.formControl}>
-                  <Typography style={{ marginTop: "1rem" }}>
+                  <Typography
+                    variant="h6"
+                    textAlign="left"
+                    style={{ marginTop: "1rem", textAlign: "left" }}
+                  >
                     {" "}
                     <label for="fname" className={classes.inputLbel}>
                       Type
@@ -232,21 +303,47 @@ const SignupPage = () => {
                   <Select
                     native
                     required
+                    placeholder="Select Type"
                     variant="outlined"
                     value={state.age}
                     onChange={handleChange}
                     inputProps={{
-                      name: "age",
+                      name: "type",
                       id: "age-native-simple",
                     }}
                   >
-                    <option aria-label="None" value="" />
+                    <option value="buyer">buyer</option>
                     <option value="seller">seller</option>
                     <option value="delivery boy">delivery boy</option>
-                    <option value="buyer">buyer</option>
                   </Select>
                 </FormControl>
-{/* 
+
+                {state.type === "seller" ? (
+                  <>
+                    <Typography
+                      variant="h6"
+                      style={{ marginTop: "1rem", textAlign: "left" }}
+                    >
+                      {" "}
+                      <label for="fname" className={classes.inputLbel}>
+                        Profile Image
+                      </label>
+                    </Typography>
+
+                    <TextField
+                      fullWidth
+                      type="file"
+                      variant="outlined"
+                      required
+                      name="image"
+                      accept="image/png, image/jpeg"
+                      onChange={(event) => onImageChange(event)}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+                {/* 
                 <Box
                   style={{
                     marginTop: "2.5rem",
@@ -294,8 +391,14 @@ const SignupPage = () => {
             <Grid item xs={12} lg={6} className={classes.navBarContainer}>
               <div className={classes.RegisterContent}>
                 <Box>
-                  {" "}
-                  <img src="/images/gallery/06.jpg" />
+                  {state.image ? (
+                    <img src={state.image} className={classes.uplodimg} />
+                  ) : (
+                    <img
+                      src="/images/gallery/06.jpg"
+                      className={classes.uplodimg}
+                    />
+                  )}
                 </Box>
                 <Box className={classes.boxContainer}>
                   <Typography

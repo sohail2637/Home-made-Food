@@ -161,12 +161,15 @@ const NaveBar = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/seller">Dish1 seller</Link>
+        <Link to="/admin">Dish1 seller</Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/addproduct">add Dish </Link>
+        <Link to="/aboutseller">add Dish </Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Dish3</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {" "}
+        <Link to="/delaveryboy"> Dish3</Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -308,9 +311,11 @@ const NaveBar = () => {
           </div>
           <div>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={1} color="secondary">
-                <AddShoppingCartIcon />
-              </Badge>
+              <Link to="cartproducts">
+                <Badge badgeContent={1} color="secondary">
+                  <AddShoppingCartIcon />
+                </Badge>
+              </Link>
             </IconButton>
             {/* <p >Cart</p> */}
           </div>

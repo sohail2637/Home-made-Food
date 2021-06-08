@@ -14,6 +14,10 @@ import Store from "../redux/Store";
 import { Provider } from "react-redux";
 import Seller from "./Seller/Seller";
 import AddProducts from "./Seller/Addprodust/AddProduct";
+import CartItems from "./cartItems/CartItems";
+import AdminPanal from "../AdminPanal/AdminPanal";
+import DetailsSeller from "../AdminPanal/DetailsSeller";
+import DetailDeliveryBoy from "../AdminPanal/DetailDeliveryBoy";
 const Main = () => {
   return (
     <div>
@@ -33,7 +37,11 @@ const Main = () => {
           />
           {/* seller dashboard....... */}
           <Route path="/seller" component={Seller} />
-          <Route path="/addproduct"  component={AddProducts} />
+          <Route path="/addproduct" component={AddProducts} />
+          <Route path="/cartproducts" component={CartItems} />
+          <Route path="/admin" component={AdminPanal} />
+          <Route path="/aboutseller" component={DetailsSeller} />
+          <Route path="/delaveryboy" component={DetailDeliveryBoy} />
 
           <Footer />
         </Router>

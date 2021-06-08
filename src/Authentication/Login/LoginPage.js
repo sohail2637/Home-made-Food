@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "10rem",
   },
   inputLbel: {
-    paddingLeft: "1rem",
-    fontSize: "12px",
+    paddingLeft: "0.8rem",
+    fontSize: "14px",
+    color: "#243028",
   },
 
   seeBtn: {
@@ -108,57 +109,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- const LoginPage=()=> {
+const LoginPage = () => {
   const classes = useStyles();
-
+  const [state, setState] = React.useState({
+    email: "",
+    password: "",
+  });
+const handleChange = (event) => {
+  const name = event.target.name;
+  setState({
+    ...state,
+    [name]: event.target.value,
+  });
+  console.log({ [name]: event.target.value });
+};
+const submationform = (event) => {
+  event.preventDefault();
+  console.log(state);
+};
   return (
     <div>
       <div className={classes.root}>
         <Grid container>
           <Grid item xs={12} lg={6} className={classes.formContainer}>
             <Container maxWidth="md">
-              <Typography style={{ marginTop: "1rem" }}>
-                {" "}
-                <label for="fname" className={classes.inputLbel}>
-                  Email
-                </label>
-              </Typography>
+              <form onSubmit={submationform}>
+                <Typography variant='h6' style={{ marginTop: "1rem",textAlign:'left' }}>
+                  {" "}
+                  <label for="fname" className={classes.inputLbel}>
+                    Email
+                  </label>
+                </Typography>
 
-              <TextField
-                fullWidth
-                id="outlined-helperText"
-                defaultValue="Default Value"
-                variant="outlined"
-              />
-              <Typography style={{ marginTop: "1rem" }}>
-                {" "}
-                <label for="fname" className={classes.inputLbel}>
-                  Password
-                </label>
-              </Typography>
-
-              <TextField
-                fullWidth
-                id="outlined-helperText"
-                defaultValue="Default Value"
-                variant="outlined"
-              />
-              {/* <Box
-                style={{
-                  marginTop: "2.5rem",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <ReCAPTCHA
-                  sitekey="6LdxAKkUAAAAAG05cGSU0EWoUWFvQzM54Y8T00kP"
-                  // onChange={onChange}
+                <TextField
+                  fullWidth
+                  type='email'
+                  placeholder='Email'
+                  required
+                  onChange={handleChange}
+                  id="outlined-helperText"
+                  variant="outlined"
                 />
-              </Box> */}
-              <Button fullWidth={true} className={classes.seeBtn} fullWidth>
-                Submit
-              </Button>
-              {/* </form> */}
+                <Typography variant='h6' style={{ marginTop: "1rem", textAlign:'left' }}>
+                  {" "}
+                  <label for="fname" className={classes.inputLbel}>
+                    Password
+                  </label>
+                </Typography>
+
+                <TextField
+                  fullWidth
+                  required
+                  placeholder='Password'
+                  type='password'
+                  onChange={handleChange}
+                  id="outlined-helperText"
+                  variant="outlined"
+                />
+                <Button fullWidth={true} className={classes.seeBtn} fullWidth>
+                  Submit
+                </Button>
+              </form>
 
               <Box className={classes.orContainer}>
                 <div className={classes.firstLine} />
@@ -217,5 +228,5 @@ const useStyles = makeStyles((theme) => ({
       </div>
     </div>
   );
- }
+};
 export default LoginPage;
