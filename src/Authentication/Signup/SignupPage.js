@@ -14,11 +14,8 @@ import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import { InputLabel } from "@material-ui/core/";
-
+import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -143,7 +140,7 @@ const SignupPage = () => {
     password: "",
     mobileNumber: null,
     image: null,
-    type: "hai",
+    type: "",
   });
 
   const handleChange = (event) => {
@@ -168,6 +165,11 @@ const SignupPage = () => {
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
+    // const formdata = new FormData();
+    // formdata.append('data', state);
+    // axios.post('/signup', formdata)
+    //   .then(res => console.log('api respons: ', res));
+    
   };
   return (
     <div>
@@ -192,7 +194,7 @@ const SignupPage = () => {
                   placeholder="First Name"
                   id="outlined-helperText"
                   variant="outlined"
-                  // value={state.Firstname}
+                  name="Firstname"
                 />
 
                 <Typography
@@ -208,10 +210,10 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  name="LastName"
                   placeholder="Last Name"
                   id="outlined-helperText"
                   variant="outlined"
-                  // value={state.LastName}
                 />
                 <Typography
                   variant="h6"
@@ -226,10 +228,10 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  name="userName"
                   placeholder="User Name"
                   id="outlined-helperText"
                   variant="outlined"
-                  // value={state.userName}
                 />
 
                 <Typography
@@ -246,7 +248,7 @@ const SignupPage = () => {
                   fullWidth
                   id="outlined-helperText"
                   onChange={handleChange}
-                  name="phone"
+                  name="mobileNumber"
                   placeholder="Mobile number"
                   pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
                   variant="outlined"
@@ -267,7 +269,7 @@ const SignupPage = () => {
                   placeholder="Email"
                   id="outlined-helperText"
                   variant="outlined"
-                  // value={state.email}
+                  name="email"
                 />
 
                 <Typography
@@ -283,11 +285,11 @@ const SignupPage = () => {
                 <TextField
                   onChange={handleChange}
                   fullWidth
+                  name="password"
                   placeholder="password"
                   type="password"
                   id="outlined-helperText"
                   variant="outlined"
-                  // value={state.password}
                 />
                 <FormControl className={classes.formControl}>
                   <Typography
@@ -303,15 +305,16 @@ const SignupPage = () => {
                   <Select
                     native
                     required
-                    placeholder="Select Type"
+                    placeholder="buyer"
                     variant="outlined"
-                    value={state.age}
+                    // value={state.age}
                     onChange={handleChange}
                     inputProps={{
                       name: "type",
                       id: "age-native-simple",
                     }}
                   >
+                    <option value=""></option>
                     <option value="buyer">buyer</option>
                     <option value="seller">seller</option>
                     <option value="delivery boy">delivery boy</option>
@@ -343,19 +346,6 @@ const SignupPage = () => {
                 ) : (
                   ""
                 )}
-                {/* 
-                <Box
-                  style={{
-                    marginTop: "2.5rem",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ReCAPTCHA
-                    sitekey="6LdxAKkUAAAAAG05cGSU0EWoUWFvQzM54Y8T00kP"
-                    // onChange={onChange}
-                  />
-                </Box> */}
                 <Button
                   type="submit"
                   fullWidth={true}

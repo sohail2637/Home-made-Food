@@ -115,18 +115,18 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-const handleChange = (event) => {
-  const name = event.target.name;
-  setState({
-    ...state,
-    [name]: event.target.value,
-  });
-  console.log({ [name]: event.target.value });
-};
-const submationform = (event) => {
-  event.preventDefault();
-  console.log(state);
-};
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+    console.log({ [name]: event.target.value });
+  };
+  const submationform = (event) => {
+    event.preventDefault();
+    console.log(state);
+  };
   return (
     <div>
       <div className={classes.root}>
@@ -134,7 +134,10 @@ const submationform = (event) => {
           <Grid item xs={12} lg={6} className={classes.formContainer}>
             <Container maxWidth="md">
               <form onSubmit={submationform}>
-                <Typography variant='h6' style={{ marginTop: "1rem",textAlign:'left' }}>
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Email
@@ -143,14 +146,18 @@ const submationform = (event) => {
 
                 <TextField
                   fullWidth
-                  type='email'
-                  placeholder='Email'
+                  type="email"
+                  placeholder="Email"
+                  name="email"
                   required
                   onChange={handleChange}
                   id="outlined-helperText"
                   variant="outlined"
                 />
-                <Typography variant='h6' style={{ marginTop: "1rem", textAlign:'left' }}>
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Password
@@ -160,13 +167,19 @@ const submationform = (event) => {
                 <TextField
                   fullWidth
                   required
-                  placeholder='Password'
-                  type='password'
+                  placeholder="Password"
+                  type="password"
+                  name="password"
                   onChange={handleChange}
                   id="outlined-helperText"
                   variant="outlined"
                 />
-                <Button fullWidth={true} className={classes.seeBtn} fullWidth>
+                <Button
+                  type="submit"
+                  fullWidth={true}
+                  className={classes.seeBtn}
+                  fullWidth
+                >
                   Submit
                 </Button>
               </form>
