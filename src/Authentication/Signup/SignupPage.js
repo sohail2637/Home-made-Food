@@ -1,5 +1,4 @@
 import React from "react";
-// import AuthNavbar from "../Header";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -15,7 +14,9 @@ import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import axios from 'axios';
+import { useForm } from "react-hook-form";
+
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -138,10 +139,16 @@ const SignupPage = () => {
     userName: "",
     email: "",
     password: "",
-    mobileNumber: null,
-    image: null,
+    mobileNumber: "",
+    image: "",
     type: "",
   });
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+    // setError,
+  } = useForm();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -151,33 +158,44 @@ const SignupPage = () => {
     });
     console.log({ [name]: event.target.value });
   };
+
   const onImageChange = (event) => {
     event.preventDefault();
-    console.log(event.target.files[0].name);
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
+      console.log(img);
       setState({
         ...state,
-        image: URL.createObjectURL(img),
+        image: img,
       });
+      console.log("state imag ", state);
     }
   };
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
-    // const formdata = new FormData();
-    // formdata.append('data', state);
-    // axios.post('/signup', formdata)
-    //   .then(res => console.log('api respons: ', res));
-    
+    const data = state;
+    const formdata = new FormData();
+    formdata.append("FirstName", state.Firstname);
+    formdata.append("LastName", state.LastName);
+    formdata.append("UserName", state.userName);
+    formdata.append("email", state.email);
+    formdata.append("MobileNumber", state.mobileNumber);
+    formdata.append("Password", state.password);
+    formdata.append("Type", state.type);
+    formdata.append("Image", state.image);
+    axios
+      .post("/signup", formdata)
+      .then((res) => console.log("api respons: ", res));
   };
+
   return (
     <div>
       <div className={classes.root}>
         <Grid container>
           <Grid item xs={12} lg={6} className={classes.formContainer}>
             <Container maxWidth="md">
-              {/* <div className={classes.Regform}> */}
+              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
               <form onSubmit={submationform}>
                 <Typography
                   variant="h6"
@@ -190,11 +208,12 @@ const SignupPage = () => {
 
                 <TextField
                   onChange={handleChange}
+                  name="Firstname"
                   fullWidth
+                  required
                   placeholder="First Name"
                   id="outlined-helperText"
                   variant="outlined"
-                  name="Firstname"
                 />
 
                 <Typography
@@ -209,8 +228,9 @@ const SignupPage = () => {
 
                 <TextField
                   onChange={handleChange}
-                  fullWidth
                   name="LastName"
+                  required
+                  fullWidth
                   placeholder="Last Name"
                   id="outlined-helperText"
                   variant="outlined"
@@ -227,8 +247,9 @@ const SignupPage = () => {
 
                 <TextField
                   onChange={handleChange}
-                  fullWidth
                   name="userName"
+                  fullWidth
+                  required
                   placeholder="User Name"
                   id="outlined-helperText"
                   variant="outlined"
@@ -242,12 +263,12 @@ const SignupPage = () => {
                     Mobile Number
                   </label>
                 </Typography>
-                {/* ...........input mobile number......... */}
                 <OutlinedInput
                   type="tel"
                   fullWidth
                   id="outlined-helperText"
                   onChange={handleChange}
+                  required
                   name="mobileNumber"
                   placeholder="Mobile number"
                   pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
@@ -264,11 +285,12 @@ const SignupPage = () => {
                 </Typography>
 
                 <TextField
-                  onChange={handleChange}
                   fullWidth
                   placeholder="Email"
                   id="outlined-helperText"
+                  required
                   variant="outlined"
+                  onChange={handleChange}
                   name="email"
                 />
 
@@ -284,9 +306,10 @@ const SignupPage = () => {
 
                 <TextField
                   onChange={handleChange}
+                  name="Password"
                   fullWidth
-                  name="password"
                   placeholder="password"
+                  required
                   type="password"
                   id="outlined-helperText"
                   variant="outlined"
@@ -304,10 +327,9 @@ const SignupPage = () => {
                   </Typography>
                   <Select
                     native
-                    required
                     placeholder="buyer"
                     variant="outlined"
-                    // value={state.age}
+                    required
                     onChange={handleChange}
                     inputProps={{
                       name: "type",
@@ -338,8 +360,8 @@ const SignupPage = () => {
                       type="file"
                       variant="outlined"
                       required
-                      name="image"
                       accept="image/png, image/jpeg"
+                      name="image"
                       onChange={(event) => onImageChange(event)}
                     />
                   </>
@@ -382,10 +404,13 @@ const SignupPage = () => {
               <div className={classes.RegisterContent}>
                 <Box>
                   {state.image ? (
-                    <img src={state.image} className={classes.uplodimg} />
+                    <img
+                      src={URL.createObjectURL(state.image)}
+                      className={classes.uplodimg}
+                    />
                   ) : (
                     <img
-                      src="/images/gallery/06.jpg"
+                      src="/images/gallery/04.jpg"
                       className={classes.uplodimg}
                     />
                   )}

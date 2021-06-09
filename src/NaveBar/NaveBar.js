@@ -170,6 +170,15 @@ const NaveBar = () => {
         {" "}
         <Link to="/delaveryboy"> Dish3</Link>
       </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {" "}
+        <Link to="/addproduct"> seller form</Link>
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose}>
+        {" "}
+        <Link to="/delaveryboy"> Dish3</Link>
+      </MenuItem>
     </Menu>
   );
 
