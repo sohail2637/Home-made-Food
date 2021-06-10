@@ -145,53 +145,11 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const AdminPanal = () => {
+const DeliveryBoyPage = () => {
   const classes = useStyles();
-  const [country, setCountry] = useState([]);
-  const [value, setValue] = useState("");
-  const [employ, setEmploy] = useState("seller");
-  const viewInfo = (employ) => {
-    setEmploy(employ);
-    console.log(employ);
-    // switch {
-    //   case '':
-    // }
-  };
-
+  const [employ, setEmploy] = useState("Delivery Boy");
   return (
     <div className={classes.root}>
-      <Grid container spacing={6}>
-        <Grid item xs={12} sm={6} md={4}>
-          <Paper
-            elevation={3}
-            className={classes.paper}
-            onClick={() => viewInfo("seller")}
-          >
-            <h3 className={classes.title}> Seller </h3>
-            <h3> 4344434</h3>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <Paper
-            elevation={3}
-            className={classes.paper}
-            onClick={() => viewInfo("deliverboy")}
-          >
-            <h3 className={classes.title}> Deliver boy </h3>
-            <h3> 23423</h3>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <Paper
-            elevation={3}
-            className={classes.paper}
-            onClick={() => viewInfo("client")}
-          >
-            <h3 className={classes.title}> client </h3>
-            <h3> 234234</h3>
-          </Paper>
-        </Grid>
-      </Grid>
       <div className={classes.roottable}>
         <div
           clasName={classes.employtitle}
@@ -207,12 +165,12 @@ const AdminPanal = () => {
             </div>
             <InputBase
               placeholder="Search…"
-              value={value}
+              // value={value}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              onChange={(e) => setValue(e.target.value)}
+              // onChange={(e) => setValue(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
           </div>
@@ -225,55 +183,56 @@ const AdminPanal = () => {
             </Typography>
           </div>
         </div>
-        {employ === "seller" ? (
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Profile Pic</StyledTableCell>
-                  <StyledTableCell align="left">Full Name</StyledTableCell>
-                  <StyledTableCell align="left">Total Post</StyledTableCell>
-                  <StyledTableCell align="left">Contact No</StyledTableCell>
-                  <StyledTableCell align="left">Email</StyledTableCell>
-                  <StyledTableCell align="left">Delet</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody className={classes.tablebody}>
-                <StyledTableRow>
-                  <StyledTableCell
-                    component="th"
-                    scope="row"
-                    className={classes.titlesearch}
-                  >
-                    {" "}
-                    khkj
-                    {/* <SimpleModal country={val} /> */}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" className={classes.recovered}>
-                    dfaa
-                  </StyledTableCell>
-                  <StyledTableCell align="left" className={classes.recovered}>
-                    asasdsad
-                  </StyledTableCell>
-                  <StyledTableCell align="left" className={classes.deaths}>
-                    assasa
-                  </StyledTableCell>
-                  <StyledTableCell align="left" className={classes.deaths}>
-                    sdsq
-                  </StyledTableCell>
-                  <StyledTableCell align="left" className={classes.cases}>
-                    scc
-                  </StyledTableCell>
-                </StyledTableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : (
-          ""
-        )}
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Full Name</StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Mobile Number</StyledTableCell>
+                <StyledTableCell align="left">Phoun Number</StyledTableCell>
+                <StyledTableCell align="left">Address</StyledTableCell>
+                <StyledTableCell align="left">Postal Code</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className={classes.tablebody}>
+              <StyledTableRow>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={classes.titlesearch}
+                >
+                  {" "}
+                  khkj
+                  {/* <SimpleModal country={val} /> */}
+                </StyledTableCell>
+                <StyledTableCell align="left" className={classes.recovered}>
+                  dfaa
+                </StyledTableCell>
+                <StyledTableCell align="left" className={classes.recovered}>
+                  asasdsad
+                </StyledTableCell>
+                <StyledTableCell align="left" className={classes.deaths}>
+                  assasa
+                </StyledTableCell>
+                <StyledTableCell align="left" className={classes.deaths}>
+                  sdsq
+                </StyledTableCell>
+                <StyledTableCell align="left" className={classes.deaths}>
+                  sdsq
+                </StyledTableCell>
+
+                <StyledTableCell align="left" className={classes.cases}>
+                  scc
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );
 };
 
-export default AdminPanal;
+export default DeliveryBoyPage;

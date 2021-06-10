@@ -18,6 +18,8 @@ import CartItems from "./cartItems/CartItems";
 import AdminPanal from "../AdminPanal/AdminPanal";
 import DetailsSeller from "../AdminPanal/DetailsSeller";
 import DetailDeliveryBoy from "../AdminPanal/DetailDeliveryBoy";
+import DeliveryBoy from '../DeliveryBoy/DeliverBoy';
+import BecomeSeller from "./BecomeSeller";
 const Main = () => {
   return (
     <div>
@@ -36,12 +38,13 @@ const Main = () => {
             component={ShippingOrder}
           />
           {/* seller dashboard....... */}
-          <Route path="/seller" component={Seller} />
+          <Route path="/seller" exact component={Seller} />
           <Route path="/addproduct" component={AddProducts} />
           <Route path="/cartproducts" component={CartItems} />
           <Route path="/admin" component={AdminPanal} />
           <Route path="/aboutseller" component={DetailsSeller} />
-          <Route path="/delaveryboy" component={DetailDeliveryBoy} />
+          <Route path="/delaveryboy" component={DeliveryBoy} />
+          <Route path="/sellerportal" component={BecomeSeller} />
 
           <Footer />
         </Router>

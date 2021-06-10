@@ -5,13 +5,15 @@ import {
   Container,
   Typography,
   Button,
-  Box,OutlinedInput,
+  Box,
+  OutlinedInput,
   TextareaAutosize,
   Input,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
-// import MuiPhoneNumber from "material-ui-phone-number";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,8 +107,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   uplodimg: {
-    width: "350px",
+    width: "320px",
     height: "350px",
+  },
+  detailbox: {
+    width: "320px",
+    margin: "auto",
   },
   orContainer: {
     color: theme.lightGray,
@@ -118,13 +124,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ShippingOrder = () => {
+const DeliveryBoy = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const Dispatch = useDispatch();
   const [state, setState] = React.useState({
     Fullname: "",
     email: "",
     address: "",
     mobileNumber: "",
+    PhouneNumber: "",
     postalcode: "",
   });
 
@@ -141,7 +150,8 @@ const ShippingOrder = () => {
     event.preventDefault();
     console.log(state);
     const data = state;
-
+    history.push("/");
+    // const redux = Dispatch({ state });
     // axios
     //   .post("/signup", data)
     //   .then((res) => console.log("api respons: ", res));
@@ -150,6 +160,43 @@ const ShippingOrder = () => {
     <div>
       <div className={classes.root}>
         <Grid container>
+          {/* <Hidden xsDown> */}
+          <Grid item xs={12} lg={6} className={classes.navBarContainer}>
+            <div className={classes.RegisterContent}>
+              <Box>
+                <img
+                  src="/images/simple-house-01.jpg"
+                  className={classes.uplodimg}
+                />
+              </Box>
+              <Box className={classes.detaibox}>
+                <Typography variant="h6">Become a part of our team</Typography>
+              </Box>
+              <Box className={classes.boxContainer}>
+                <Typography
+                  variant="h5"
+                  style={{
+                    fontFamily: "Spartan",
+                    color: "#232323",
+                  }}
+                >
+                  Our services:&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style={{ color: "#f33f3f" }}>7/24</span>
+                </Typography>
+                <Typography
+                  variant="h6"
+                  style={{
+                    fontFamily: "Spartan",
+                    color: "#232323",
+                  }}
+                >
+                  Work honestly with our team and get best ravienew
+                </Typography>
+              </Box>
+            </div>
+          </Grid>
+          {/* </Hidden> */}
+
           <Grid item xs={12} lg={6} className={classes.formContainer}>
             <Container maxWidth="md">
               <form onSubmit={submationform}>
@@ -185,6 +232,25 @@ const ShippingOrder = () => {
                   required
                   name="mobileNumber"
                   placeholder="Mobile number"
+                  pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
+                  variant="outlined"
+                />
+
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "1rem", textAlign: "left" }}
+                >
+                  <label for="fname" className={classes.inputLbel}>
+                    Phoune Number
+                  </label>
+                </Typography>
+                <OutlinedInput
+                  type="tel"
+                  fullWidth
+                  id="outlined-helperText"
+                  onChange={handleChange}
+                  name="PhouneNumber"
+                  placeholder="Phoune number/ optional"
                   pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
                   variant="outlined"
                 />
@@ -258,35 +324,9 @@ const ShippingOrder = () => {
               {/* </div> */}
             </Container>
           </Grid>
-
-          <Hidden xsDown>
-            <Grid item xs={12} lg={6} className={classes.navBarContainer}>
-              <div className={classes.RegisterContent}>
-                <Box>
-                  {" "}
-                  <img src="/images/gallery/03.jpg"  className={classes.uplodimg} />
-                </Box>
-                <Box>
-                  <Typography variant="h6">Chikankri</Typography>
-                </Box>
-                <Box className={classes.boxContainer}>
-                  <Typography
-                    variant="h5"
-                    style={{
-                      fontFamily: "Spartan",
-                      color: "#232323",
-                    }}
-                  >
-                    Total:&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style={{ color: "#f33f3f" }}>0.56</span>
-                  </Typography>
-                </Box>
-              </div>
-            </Grid>
-          </Hidden>
         </Grid>
       </div>
     </div>
   );
 };
-export default ShippingOrder;
+export default DeliveryBoy;

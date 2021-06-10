@@ -9,12 +9,10 @@ import {
   OutlinedInput,
 } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-// import ReCAPTCHA from "react-google-recaptcha";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import { useForm } from "react-hook-form";
 
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
@@ -143,12 +141,6 @@ const SignupPage = () => {
     image: "",
     type: "",
   });
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-    // setError,
-  } = useForm();
 
   const handleChange = (event) => {
     const name = event.target.name;

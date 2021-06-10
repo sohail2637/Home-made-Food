@@ -15,8 +15,8 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { Link, useParams, useHistory } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 // .......redux.....//
-import { useDispatch } from 'react-redux';
-import {addtocart } from '../../redux/reducers/action' ;
+import { useDispatch } from "react-redux";
+import { addtocart } from "../../redux/reducers/action";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -96,7 +96,7 @@ export default function DetailViewProduct() {
   const { productId } = useParams();
 
   const [expanded, setExpanded] = React.useState(false);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -174,13 +174,13 @@ export default function DetailViewProduct() {
                   aria-expanded={expanded}
                   style={{
                     backgroundColor: "#232323",
-                    color: "#f33f3f",
+                    color: "#fff",
                     borderRadius: "25px",
                   }}
                   className={classes.button}
                   onClick={() => dispatch(addtocart())}
                 >
-                  <Link to="/viewproduct/shippingaddres">Add to Cart</Link>
+                  <Link to="/viewproduct/shippingaddres" style={ {color:'#fff'}}>Add to Cart</Link>
                 </Button>
               </CardActions>
             </Card>
@@ -194,11 +194,11 @@ export default function DetailViewProduct() {
             <Typography variant="h4">Dishes</Typography>
             <Divider style={{ backgroundColor: "#ddd", margin: "10px 0px" }} />
             <Box className={classes.reviewBox}>
-              <StarBorderIcon style={{ color: "#32db23" }} />
-              <StarBorderIcon style={{ color: "#32db23" }} />
-              <StarBorderIcon style={{ color: "#32db23" }} />
-              <StarBorderIcon style={{ color: "#32db23" }} />
-              <StarBorderIcon style={{ color: "#32db23" }} />
+              <StarBorderIcon style={{ color: "#f33f3f" }} />
+              <StarBorderIcon style={{ color: "#f33f3f" }} />
+              <StarBorderIcon style={{ color: "#f33f3f" }} />
+              <StarBorderIcon style={{ color: "#f33f3f" }} />
+              <StarBorderIcon style={{ color: "#f33f3f" }} />
               <Typography variant="h6">reviews</Typography>
             </Box>
             <Typography variant="h5" className={classes.reviewBox}>
@@ -207,7 +207,7 @@ export default function DetailViewProduct() {
             </Typography>
             <Divider
               style={{
-                backgroundColor: "#48ba3d",
+                backgroundColor: "#f33f3f",
                 height: "3px",
                 margin: "10px 0px",
               }}

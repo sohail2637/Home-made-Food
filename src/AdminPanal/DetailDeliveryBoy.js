@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const DetailDeliveryBoy=()=> {
-    return (
-        <div>
-           DetailDeliveryBoy 
-        </div>
-    )
+function DetailDeliveryBoy() {
+  return <div>admain related detail</div>;
 }
 
-export default DetailDeliveryBoy
+export default DetailDeliveryBoy;

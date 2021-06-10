@@ -99,6 +99,10 @@ const useStyles = makeStyles((theme) => ({
       padding: "0.4rem",
     },
   },
+  uplodimg: {
+    width: "350px",
+    height: "350px",
+  },
   orContainer: {
     color: theme.lightGray,
     display: "flex",
@@ -209,7 +213,7 @@ const LoginPage = () => {
             <Grid item xs={12} lg={6} className={classes.navBarContainer}>
               <div className={classes.RegisterContent}>
                 <Box>
-                  <img src="/images/gallery/06.jpg" />
+                  <img src="/images/gallery/06.jpg" className={classes.uplodimg} />
                 </Box>
                 <Box className={classes.boxContainer}>
                   <Typography

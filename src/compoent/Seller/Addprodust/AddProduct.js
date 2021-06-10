@@ -11,6 +11,8 @@ import {
   Select,
 } from "@material-ui/core";
 // import FormControl from "@material-ui/core/FormControl";
+import { useHistory } from "react-router-dom";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
@@ -44,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "10rem",
   },
   inputLbel: {
-    paddingLeft: "1rem",
-    fontSize: "12px",
+    paddingLeft: "0.8rem",
+    fontSize: "14px",
+    color: "#243028",
   },
 
   seeBtn: {
@@ -124,19 +127,19 @@ const useStyles = makeStyles((theme) => ({
   },
   uplodimg: {
     width: "350px",
-    height:'350px',
+    height: "350px",
   },
 }));
 
 const AddProducts = () => {
   const classes = useStyles();
-
+  const history = useHistory();
   const [state, setState] = React.useState({
     DishName: "",
-    Price: 0.00,
+    Price: 0.0,
     quantity: "sigle plate",
-    discraption: "",
-    image: null,
+    descraption: "",
+    image: "",
   });
 
   const handleChange = (event) => {
@@ -150,27 +153,52 @@ const AddProducts = () => {
 
   const onImageChange = (event) => {
     event.preventDefault();
-    console.log(event.target.files[0].name);
+    console.log(event.target.files[0]);
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
       setState({
         ...state,
-        image: URL.createObjectURL(img),
+        image: img,
       });
     }
   };
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
+    // const data = state;
+    // const formdata = new FormData();
+    // formdata.append("FirstName", state.Firstname);
+    // formdata.append("LastName", state.LastName);
+    // formdata.append("UserName", state.userName);
+    // formdata.append("email", state.email);
+    // formdata.append("MobileNumber", state.mobileNumber);
+    // formdata.append("Password", state.password);
+    // formdata.append("Type", state.type);
+    // formdata.append("Image", state.image);
+    // axios
+    //   .post("/signup", formdata)
+    //   .then((res) => console.log("api respons: ", res));
+    history.push("/seller");
   };
   return (
     <div>
       <div className={classes.root}>
         <Grid container>
+          {/* <Grid item xs={12} lg={12} className={classes.formContainer}>
+          <Box className={classes.backbtnbox} onClick={history.goBack}>
+            <ArrowBackIosIcon /> <Typography variant="h5"> Back</Typography>
+            </Box>
+            </Grid> */}
           <Grid item xs={12} lg={6} className={classes.formContainer}>
+
             <Container maxWidth="md">
-              <form>
+              <form onSubmit={submationform}>
                 {/* .......image upload....... */}
+                <Typography style={{ marginTop: "1rem", textAlign: "left" }}>
+                  <label for="fname" className={classes.inputLbel}>
+                    Image
+                  </label>
+                </Typography>
                 <TextField
                   fullWidth
                   type="file"
@@ -180,7 +208,7 @@ const AddProducts = () => {
                   accept="image/png, image/jpeg"
                   onChange={(event) => onImageChange(event)}
                 />
-                <Typography>
+                <Typography style={{ marginTop: "1rem", textAlign: "left" }}>
                   <label for="fname" className={classes.inputLbel}>
                     Dish Name
                   </label>
@@ -193,7 +221,7 @@ const AddProducts = () => {
                   id="outlined-helperText"
                   variant="outlined"
                 />
-                <Typography style={{ marginTop: "1rem" }}>
+                <Typography style={{ marginTop: "1rem", textAlign: "left" }}>
                   <label for="fname" className={classes.inputLbel}>
                     Price
                   </label>
@@ -208,7 +236,7 @@ const AddProducts = () => {
                   variant="outlined"
                 />
                 <FormControl className={classes.formControl}>
-                  <Typography style={{ marginTop: "1rem" }}>
+                  <Typography style={{ marginTop: "1rem", textAlign: "left" }}>
                     <label for="fname" className={classes.inputLbel}>
                       Quantity
                     </label>
@@ -230,7 +258,7 @@ const AddProducts = () => {
                     <option value="one person">one person</option>
                   </Select>
                 </FormControl>
-                <Typography style={{ marginTop: "1rem" }}>
+                <Typography style={{ marginTop: "1rem", textAlign: "left" }}>
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Descraption
@@ -271,7 +299,11 @@ const AddProducts = () => {
             <Grid item xs={12} lg={6} className={classes.navBarContainer}>
               <div className={classes.RegisterContent}>
                 <Box>
-                  <img src={state.image} className={classes.uplodimg} />
+                  <img
+                    // src={imagepath}
+                    className={classes.uplodimg}
+                    alt="Not image Upload"
+                  />
                 </Box>
                 <Box>
                   <Typography variant="h6">{state.DishName}</Typography>

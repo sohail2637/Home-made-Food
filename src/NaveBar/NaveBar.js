@@ -168,11 +168,11 @@ const NaveBar = () => {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         {" "}
-        <Link to="/delaveryboy"> Dish3</Link>
+        <Link to="/seller"> sellerPortal</Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         {" "}
-        <Link to="/addproduct"> seller form</Link>
+        {/* <Link to="/addproduct"> seller form</Link> */}
       </MenuItem>
 
       <MenuItem onClick={handleMenuClose}>
@@ -226,6 +226,14 @@ const NaveBar = () => {
           </Link>
         </Button>
       </MenuItem>
+      <MenuItem>
+        <Button color="inherit" onClick={handleMenuClose}>
+          <Link className={classes.mobilelink} to="/sellerportal">
+            Become a Seller
+          </Link>
+        </Button>
+      </MenuItem>
+
       <MenuItem>
         {" "}
         <Button color="inherit" onClick={handleMenuClose}>
@@ -295,6 +303,12 @@ const NaveBar = () => {
                 ContactUs
               </Link>
             </Button>
+            <Button color="inherit">
+              <Link className={classes.link} to="/sellerportal">
+                Become a seller
+              </Link>
+            </Button>
+
             <Button color="inherit">
               <Link className={classes.link} to="/login">
                 Login

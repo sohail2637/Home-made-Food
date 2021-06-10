@@ -1,8 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeliveryBoyPage from "./DeliveryBoyPage";
 import "./Seller.css";
+const style = {
+  bttton: {
+    lineHeight: "30px",
+    fontSize: "24px",
+    backgroundColor: "#fff",
+    border: "1px solid #f7f7f7",
 
-const SellerPortal = () => {
+    ":hover": {
+      backgroundColor: "#f33f3f",
+    },
+  },
+};
+
+const Seller = () => {
   return (
     <div>
       {/* Banner Starts Here */}
@@ -36,171 +49,215 @@ const SellerPortal = () => {
           <div className="container">
             <div className="col-md-12">
               <div className="section-heading">
-                <h2>Meal post</h2>
-                {/* <a href="products.html">
-                  view all products <i className="fa fa-angle-right" />
-                </a> */}
+                <h2>Your Post</h2>
+                <Link to="/addproduct">
+                  <h3>
+                    Add Post <i className="fa fa-angle-right" />
+                  </h3>
+                </Link>
               </div>
             </div>
+
             <div
               className="row mainbox"
               style={{ display: "flex", flexWrap: "wrap" }}
             >
               <div className="col-md-4 carditem">
-                <Link to="viewproduct">
-                  <div className="product-item">
-                    <a href="#">
-                      <img src="/images/gallery/01.jpg" alt />
-                    </a>
-                    <div className="down-content">
-                      <div className="cardTitle">
-                        <a href="#">
-                          <h4>Tittle title Tittle</h4>
-                        </a>
-                        <h6>$25.75</h6>
-                      </div>
-                      <p>
-                        Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
-                        corporis nulla aspernatur.
-                      </p>
-                      <ul className="stars">
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                      </ul>
-                      <span>Reviews (24)</span>
+                <div className="product-item">
+                  <img src="/images/gallery/01.jpg" alt />
+                  <div className="down-content">
+                    <div className="cardTitle">
+                      <h4>Tittle title Tittle</h4>
+                      <h6>$25.75</h6>
                     </div>
+                    <p>
+                      Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                      corporis nulla aspernatur.
+                    </p>
+
+                    <ul className="stars">
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                    </ul>
+                    <span>Reviews (24)</span>
                   </div>
-                </Link>
+                  <div className="col-lg-12" style={{ padding: "0px" }}>
+                    <fieldset>
+                      <button
+                        type="submit"
+                        id="form-submit"
+                        className="filled-button col-lg-12"
+                        style={style.bttton}
+                      >
+                        Remove Post
+                      </button>
+                    </fieldset>
+                  </div>
+                </div>
               </div>
               <div className="col-md-4 carditem">
-                <Link to="viewproduct">
-                  <div className="product-item">
-                    <a href="#">
-                      <img src="/images/gallery/02.jpg" alt />
-                    </a>
-                    <div className="down-content ">
-                      <div className="cardTitle">
-                        <a href="#">
-                          <h4>Tittle title Tittle</h4>
-                        </a>
-                        <h6>$25.75</h6>
-                      </div>
-                      <p>
-                        Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
-                        corporis nulla aspernatur.
-                      </p>
-                      <ul className="stars">
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                      </ul>
-                      <span>Reviews (21)</span>
+                <div className="product-item">
+                  <a href="#">
+                    <img src="/images/gallery/02.jpg" alt />
+                  </a>
+                  <div className="down-content ">
+                    <div className="cardTitle">
+                      <a href="#">
+                        <h4>Tittle title Tittle</h4>
+                      </a>
+                      <h6>$25.75</h6>
                     </div>
+                    <p>
+                      Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                      corporis nulla aspernatur.
+                    </p>
+                    <ul className="stars">
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                    </ul>
+                    <span>Reviews (21)</span>
                   </div>
-                </Link>
+                  <div className="col-lg-12" style={{ padding: "0px" }}>
+                    <fieldset>
+                      <button
+                        type="submit"
+                        id="form-submit"
+                        className="filled-button col-lg-12"
+                        style={style.bttton}
+                      >
+                        Remove Post
+                      </button>
+                    </fieldset>
+                  </div>
+                </div>
               </div>
               <div className="col-md-4 carditem">
-                <Link to="viewproduct">
-                  <div className="product-item">
-                    <a href="#">
-                      <img src="/images/gallery/03.jpg" alt />
-                    </a>
-                    <div className="down-content">
-                      <div className="cardTitle">
-                        <a href="#">
-                          <h4>Tittle title Tittle</h4>
-                        </a>
-                        <h6>$25.75</h6>
-                      </div>
-                      <p>
-                        Sixteen Clothing is free CSS template provided by
-                        TemplateMo.
-                      </p>
-                      <ul className="stars">
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                      </ul>
-                      <span>Reviews (36)</span>
+                <div className="product-item">
+                  <a href="#">
+                    <img src="/images/gallery/03.jpg" alt />
+                  </a>
+                  <div className="down-content">
+                    <div className="cardTitle">
+                      <a href="#">
+                        <h4>Tittle title Tittle</h4>
+                      </a>
+                      <h6>$25.75</h6>
                     </div>
+                    <p>
+                      Sixteen Clothing is free CSS template provided by
+                      TemplateMo.
+                    </p>
+                    <ul className="stars">
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                    </ul>
+                    <span>Reviews (36)</span>
                   </div>
-                </Link>
+                  <div className="col-lg-12" style={{ padding: "0px" }}>
+                    <fieldset>
+                      <button
+                        type="submit"
+                        id="form-submit"
+                        className="filled-button col-lg-12"
+                        style={style.bttton}
+                      >
+                        Remove Post
+                      </button>
+                    </fieldset>
+                  </div>
+                </div>
               </div>
               <div className="col-md-4 carditem">
-                <Link to="viewproduct">
-                  <div className="product-item">
-                    <a href="#">
-                      <img src="/images/gallery/04.jpg" alt />
-                    </a>
-                    <div className="down-content">
-                      <div className="cardTitle">
-                        <a href="#">
-                          <h4>Tittle title Tittle</h4>
-                        </a>
-                        <h6>$25.75</h6>
-                      </div>
-                      <p>
-                        Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
-                        corporis nulla aspernatur.
-                      </p>
-                      <ul className="stars">
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                        <li>
-                          <i className="fa fa-star" />
-                        </li>
-                      </ul>
-                      <span>Reviews (48)</span>
+                <div className="product-item">
+                  <a href="#">
+                    <img src="/images/gallery/04.jpg" alt />
+                  </a>
+                  <div className="down-content">
+                    <div className="cardTitle">
+                      <a href="#">
+                        <h4>Tittle title Tittle</h4>
+                      </a>
+                      <h6>$25.75</h6>
                     </div>
+                    <p>
+                      Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                      corporis nulla aspernatur.
+                    </p>
+                    <ul className="stars">
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                      <li>
+                        <i className="fa fa-star" />
+                      </li>
+                    </ul>
+                    <span>Reviews (48)</span>
                   </div>
-                </Link>
+                  {/* <div className="col-lg-12" style={{ padding: "0px" }}>
+                    <fieldset>
+                      <button
+                        type="submit"
+                        id="form-submit"
+                        className="filled-button col-lg-12"
+                        style={{
+                          lineHeight: "30px",
+                          fontSize: "24px",
+                          backgroundColor: "#fff",
+                        }}
+                      >
+                        Remove Post
+                      </button>
+                    </fieldset>
+                  </div> */}
+                </div>
               </div>
               <div className="col-md-4 carditem">
                 <Link to="viewproduct">
@@ -285,8 +342,9 @@ const SellerPortal = () => {
         </div>
       </div>
       {/* Display Card end */}
+      <DeliveryBoyPage />
     </div>
   );
 };
 
-export default SellerPortal;
+export default Seller;
