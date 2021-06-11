@@ -6,7 +6,7 @@ let DishSchema=mongoose.Schema({
         ref: 'user'
     },
     dishImage:String,
-    disName:String,
+    dishName:String,
     dishCategory:String,
     dishPrize:Number,
     dishQuantity:String,

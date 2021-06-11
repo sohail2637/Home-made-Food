@@ -6,6 +6,7 @@ import Hidden from "@material-ui/core/Hidden";
 // import ReCAPTCHA from "react-google-recaptcha";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,6 +131,9 @@ const LoginPage = () => {
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
+    axios.post("/login", state).then((res) => {
+      console.log(res);
+    });
   };
   return (
     <div>
@@ -213,7 +217,10 @@ const LoginPage = () => {
             <Grid item xs={12} lg={6} className={classes.navBarContainer}>
               <div className={classes.RegisterContent}>
                 <Box>
-                  <img src="/images/gallery/06.jpg" className={classes.uplodimg} />
+                  <img
+                    src="/images/gallery/06.jpg"
+                    className={classes.uplodimg}
+                  />
                 </Box>
                 <Box className={classes.boxContainer}>
                   <Typography

@@ -3,7 +3,7 @@ import Footer from "../Footer/Footer";
 import NaveBar from "../NaveBar/NaveBar";
 import About from "./About/About";
 import LandingPage from "./LandingPage/LandingPage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch, } from "react-router-dom";
 import ContactUs from "./ContactUs/ContactUs";
 import LoginPage from "../Authentication/Login/LoginPage";
 import SignupPage from "../Authentication/Signup/SignupPage";

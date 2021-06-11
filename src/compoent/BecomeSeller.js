@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function BecomeSeller() {
   return (
@@ -37,52 +38,6 @@ function BecomeSeller() {
 
         <div className="container maincotan">
           <div className="row innercotan flex">
-            {/* become seller start */}
-
-            <div className="col-md-4 carditem">
-              <div
-                className="team-member"
-                style={{
-                  backgroundColor: "#f7f7f7",
-                  height: "450px",
-                  margin: "auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                }}
-              >
-                <div>
-                  <div className="down-content">
-                    <h4>Johnny William</h4>
-                    <span>CO-Founder</span>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-                      corporis nulla.
-                    </p>
-                  </div>
-                  <div className="col-lg-12">
-                    <fieldset>
-                      <button
-                        id="form-submit"
-                        className="filled-button"
-                        style={{
-                          fontSize: "28px",
-                          padding: "10px",
-                          borderRadius: "10px",
-                          backgroundColor: "#1a6692",
-                          color: "#fff",
-                        }}
-                      >
-                        Become a seller
-                      </button>
-                    </fieldset>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* become seller end */}
             <div className="col-md-4 carditem">
               <div className="team-member">
                 <div className="thumb-container">
@@ -288,9 +243,57 @@ function BecomeSeller() {
                 </div>
               </div>
             </div>
+            {/* become seller start */}
+
+            <div className="col-md-4 carditem" style={{marginTop:'0px'}}>
+              <div
+                className="team-member"
+                style={{
+                  backgroundColor: "#f7f7f7",
+                  height: "430px",
+                  margin: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <div>
+                  <div className="down-content">
+                    <h4>Johnny William</h4>
+                    <span>CO-Founder</span>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing itaque
+                      corporis nulla.
+                    </p>
+                  </div>
+                  <div className="col-lg-12">
+                    <fieldset>
+                      <Link to="/signup">
+                        <button
+                          id="form-submit"
+                          className="filled-button"
+                          style={{
+                            fontSize: "28px",
+                            padding: "10px",
+                            borderRadius: "10px",
+                            backgroundColor: "#1a6692",
+                            color: "#fff",
+                          }}
+                        >
+                          Become a seller/buyer
+                        </button>
+                      </Link>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* become seller end */}
           </div>
         </div>
-          </div>
+      </div>
     </div>
   );
 }

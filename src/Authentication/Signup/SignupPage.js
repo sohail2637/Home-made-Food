@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 
@@ -131,6 +131,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignupPage = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [state, setState] = React.useState({
     Firstname: "",
     LastName: "",
@@ -163,22 +164,33 @@ const SignupPage = () => {
       console.log("state imag ", state);
     }
   };
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
+
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
     const data = state;
     const formdata = new FormData();
+    // formdata.append('data', state);
     formdata.append("FirstName", state.Firstname);
     formdata.append("LastName", state.LastName);
     formdata.append("UserName", state.userName);
     formdata.append("email", state.email);
     formdata.append("MobileNumber", state.mobileNumber);
-    formdata.append("Password", state.password);
+    formdata.append("password", state.password);
     formdata.append("Type", state.type);
-    formdata.append("Image", state.image);
+    formdata.append("image", state.image);
+    console.log("formdata is this", formdata.get("image"));
     axios
-      .post("/signup", formdata)
-      .then((res) => console.log("api respons: ", res));
+      .post("/signup", formdata, config)
+      .then((res) => {
+        console.log("api respons: ", res);
+        history.push("/login");
+        console.log({ res });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -292,13 +304,13 @@ const SignupPage = () => {
                 >
                   {" "}
                   <label for="fname" className={classes.inputLbel}>
-                    Password
+                    password
                   </label>
                 </Typography>
 
                 <TextField
                   onChange={handleChange}
-                  name="Password"
+                  name="password"
                   fullWidth
                   placeholder="password"
                   required

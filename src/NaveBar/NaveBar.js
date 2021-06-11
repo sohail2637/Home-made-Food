@@ -229,7 +229,7 @@ const NaveBar = () => {
       <MenuItem>
         <Button color="inherit" onClick={handleMenuClose}>
           <Link className={classes.mobilelink} to="/sellerportal">
-            Become a Seller
+            Become a seller/buyer
           </Link>
         </Button>
       </MenuItem>
@@ -305,7 +305,7 @@ const NaveBar = () => {
             </Button>
             <Button color="inherit">
               <Link className={classes.link} to="/sellerportal">
-                Become a seller
+                Become a seller/buyer
               </Link>
             </Button>
 
