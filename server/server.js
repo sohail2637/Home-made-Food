@@ -4,6 +4,10 @@ let myApp = express();
 myApp.use(cors());
 let fs = require("fs");
 let path = require("path");
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('maano');
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 var multer = require("multer");
 
@@ -29,6 +33,7 @@ const jwt_decode = require("jwt-decode");
 let mongoose = require("mongoose");
 let SiteUsers = require(".//db/models/users");
 let Dish = require("./db/models/dish");
+const { decode } = require("punycode");
 
 mongoose.connect(
   "mongodb+srv://123456sohail:123456sohail@cluster0.chxyr.mongodb.net/Food?retryWrites=true&w=majority",
@@ -53,75 +58,105 @@ myApp.post("/checksession", async function (req, res) {
 
 myApp.post("/signup", upload.single("image"), async function (req, res) {
   console.log(req.body);
-  let user = new SiteUsers();
-  (user.fname = req.body.FirstName),
-    (user.lname = req.body.LastName),
-    (user.username = req.body.UserName),
-    (user.contact = req.body.MobileNumber),
-    (user.email = req.body.email),
-    (user.password = req.body.password),
-    (user.type = req.body.Type),
-    req.file
-      ? (user.sellerimage = req.file.originalname)
-      : (user.sellerimage = "");
-  await user.save();
-  res.json({
-    msg: "Nabiha",
+  let user1 = await SiteUsers.findOne({
+    email: req.body.email,
   });
+  if (user1) {
+    res.json({
+      msg: "Email Already in Use"
+    })
+  } else {
+    let userToken = { password: req.body.password };
+    let token = jwt.sign(userToken, config.secret)
+    console.log(token);
+    let user = new SiteUsers();
+    (user.fname = req.body.FirstName),
+      (user.lname = req.body.LastName),
+      (user.username = req.body.UserName),
+      (user.contact = req.body.MobileNumber),
+      (user.email = req.body.email),
+      (user.password = token),
+      (user.type = req.body.Type),
+      req.file
+        ? (user.sellerimage = req.file.originalname)
+        : (user.sellerimage = "");
+    await user.save();
+    res.json({
+      msg: "Nabiha",
+    });
+  }
+
+
+
+
+
+  // const encryptedString = cryptr.encrypt(req.body.password);
+  // const decryptedString = cryptr.decrypt(encryptedString);
+  // console.log(encryptedString);
+  // console.log(decryptedString);
+
+  // var hash = bcrypt.hashSync(req.body.password, salt);
+  // console.log(hash)
+
 });
 myApp.post("/login", async function (req, res) {
   console.log(req.body);
   let user = await SiteUsers.findOne({
     email: req.body.email,
-    password: req.body.password,
+  }, function (err, docs) {
+    console.log(docs._doc.password)
+    var decoded = jwt_decode(docs._doc.password);
+    console.log(decoded)
+    if (decoded.password == req.body.password) {
+      console.log('Password')
+    
+      let userToken = { id: docs._doc._id};
+      jwt.sign(
+        userToken,
+        config.secret,
+        {
+          expiresIn: "6d",
+        },
+        (err, token) => {
+          res.json({
+            token,
+            success: true,
+            msg: "User Found",
+            _id: docs._doc._id,
+            username: docs._doc.username,
+            password: docs._doc.password,
+            email: docs._doc.email,
+            contact: docs._doc.contact,
+            type: docs._doc.type,
+            Image: docs._doc.sellerimage,
+          });
+        }
+      );
+    } else {
+      res.json({
+        msg: "User Not Found",
+      });
+    }
   });
 
-  if (user) {
-    let userToken = { id: user._id };
-    jwt.sign(
-      userToken,
-      config.secret,
-      {
-        expiresIn: "6d",
-      },
-      (err, token) => {
-        res.json({
-          token,
-          success: true,
-          msg: "User Found",
-          _id: user._id,
-          username: user.username,
-          password: user.password,
-          email: user.email,
-          contact: user.contact,
-          type: user.type,
-          Image: user.sellerimage,
-        });
-      }
-    );
-  } else {
-    res.json({
-      msg: "User Not Found",
-    });
-  }
+  
+
+
 });
-myApp.post(
-  "/postproduct",
-  upload.single("dishImage"),
-  async function (req, res) {
-    console.log(req.body);
-    let dish = new Dish();
-    (dish.referenceId = req.body.id),
-      (dish.dishName = req.body.dishName),
-      (dish.dishCategory = req.body.dishCategory),
-      (dish.dishPrize = req.body.dishPrize),
-      (dish.dishQuantity = req.body.dishQuantity),
-      (dish.dishImage = req.file.originalname);
-    await dish.save();
-    res.json({
-      msg: "Nabiha",
-    });
-  }
+myApp.post("/postproduct", upload.single("dishImage"), async function (req, res) {
+  console.log(req.body);
+  let dish = new Dish();
+  (dish.referenceId = req.body.id),
+    (dish.dishName = req.body.dishName),
+    (dish.dishCategory = req.body.dishCategory),
+    (dish.dishPrize = req.body.dishPrize),
+    (dish.dishQuantity = req.body.dishQuantity),
+    (dish.dishImage = req.file.originalname);
+  await dish.save();
+  res.json({
+    msg: "Nabiha",
+  });
+}
 );
 myApp.use(express.static("./server/allData/uploads"));
 // myApp.use(express.static('./server/build'))
