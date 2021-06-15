@@ -141,6 +141,9 @@ const SignupPage = () => {
     mobileNumber: "",
     image: "",
     type: "",
+    address: "",
+    mobileNumber: "",
+    PhouneNumber: "",
   });
 
   const handleChange = (event) => {
@@ -367,6 +370,67 @@ const SignupPage = () => {
                       accept="image/png, image/jpeg"
                       name="image"
                       onChange={(event) => onImageChange(event)}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+                {state.type === "delivery boy" ? (
+                  <>
+                    <Typography
+                      variant="h6"
+                      style={{ marginTop: "1rem", textAlign: "left" }}
+                    >
+                      <label for="fname" className={classes.inputLbel}>
+                        Phoune Number
+                      </label>
+                    </Typography>
+                    <OutlinedInput
+                      type="tel"
+                      fullWidth
+                      id="outlined-helperText"
+                      onChange={handleChange}
+                      name="PhouneNumber"
+                      placeholder="Phoune number/ optional"
+                      pattern="[0-9]{3}-&nbsp;[0-9]{2}-[0-9]{3}"
+                      variant="outlined"
+                    />
+                    <Typography
+                      style={{ marginTop: "1rem", textAlign: "left" }}
+                    >
+                      {" "}
+                      <label for="fname" className={classes.inputLbel}>
+                        Address
+                      </label>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      required
+                      onChange={handleChange}
+                      name="address"
+                      placeholder="Address"
+                      id="standard-multiline-static"
+                      multiline
+                      rows={4}
+                      variant="outlined"
+                    />
+                    <Typography
+                      style={{ marginTop: "1rem", textAlign: "left" }}
+                    >
+                      <label for="fname" className={classes.inputLbel}>
+                        Postal Code
+                      </label>
+                    </Typography>
+
+                    <TextField
+                      fullWidth
+                      type="number"
+                      onChange={handleChange}
+                      name="postalcode"
+                      placeholder="Postal Code"
+                      required
+                      id="outlined-helperText"
+                      variant="outlined"
                     />
                   </>
                 ) : (

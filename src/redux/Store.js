@@ -1,9 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { cartreducer } from "./reducers/reducers";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  addtocart
+} from "./reducers/reducers";
+  // shippinconfigureStoregreducer,
+  // loginuser,
+// import { addtocart } from "./reducers/reducers";
 
 const Store = configureStore({
+// combineReducers({
+
     reducer: {
-        cartItem: cartreducer,
-    }
-})
-export default Store
+      counter: addtocart
+    
+    },
+  // })
+  
+});
+export default Store 

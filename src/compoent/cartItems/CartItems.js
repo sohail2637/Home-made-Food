@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Table, Box, Typography } from "@material-ui/core";
+import { Table, Box, Typography, Button } from "@material-ui/core";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Link } from "react-router-dom";
 // import FetchCartData from "/asserts/images/data/data-file.js";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   mainbox: {
@@ -67,14 +67,14 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 export default function CartItems() {
-//   const data = localforage.getItem("cartItemId");
-  const dispatch = useDispatch();
+  //   const data = localforage.getItem("cartItemId");
+  // const dispatch = useDispatch();
   const classes = useStyles();
 
   const [quantiety, setQuantiety] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const productId = useSelector((state) => state.productId);
+  // const productId = useSelector((state) => state.productId);
 
   // const Items = localforage.getItem("cartItemId").then((items) => {
   //   items.forEach((element) => {
@@ -88,32 +88,33 @@ export default function CartItems() {
   return (
     <>
       {/* {data.length === 0 ? ( */}
-        <Typography
-          variant="h6"
-          alignItems="center"
-          style={{ color: "#6a8070", marginTop: "10%" }}
-        >
-          There is no item in cart
-        </Typography>
+      <Typography
+        variant="h6"
+        alignItems="center"
+        style={{ color: "#6a8070", marginTop: "10%" }}
+      >
+        There is no item in cart
+      </Typography>
       {/* ) : ( */}
-        <Box>
-          <TableContainer component={Paper} className={classes.mainbox}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#edf5f2" }}>
-                <TableRow>
-                  <StyledTableCell align="center">Image</StyledTableCell>
-                  <StyledTableCell align="center">Remove</StyledTableCell>
-                  <StyledTableCell align="center">ProductName</StyledTableCell>
-                  <StyledTableCell align="center">Uniteprice</StyledTableCell>
-                  <StyledTableCell align="center">Quantity</StyledTableCell>
-                  <StyledTableCell align="center">Total</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              {/* <TableBody> */}
-                {/* orignal text */}
-                {/* {FetchCartData.filter((item) => data.includes(item.id)).map( */}
-                {/* spam text */}
-                {/* {FetchCartData.map((item, index) => (
+      <Box>
+        <TableContainer component={Paper} className={classes.mainbox}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead style={{ backgroundColor: "#edf5f2" }}>
+              <TableRow>
+                <StyledTableCell align="center">Image</StyledTableCell>
+                <StyledTableCell align="center">Remove</StyledTableCell>
+                <StyledTableCell align="center">ProductName</StyledTableCell>
+                <StyledTableCell align="center">Uniteprice</StyledTableCell>
+                <StyledTableCell align="center">Quantity</StyledTableCell>
+                <StyledTableCell align="center">Total</StyledTableCell>
+              </TableRow>
+            </TableHead>
+
+            {/* <TableBody> */}
+            {/* orignal text */}
+            {/* {FetchCartData.filter((item) => data.includes(item.id)).map( */}
+            {/* spam text */}
+            {/* {FetchCartData.map((item, index) => (
                   <StyledTableRow key={item.id} style={{ height: "125px" }}>
                     <StyledTableCell component="th" scope="row" align="center">
                       <Link to={`/viewproduct/${item.id}`}>
@@ -172,7 +173,7 @@ export default function CartItems() {
                                 justifyContent: "center",
                               }}
                             > */}
-                          {/* <span
+            {/* <span
                                 key={item.id}
                                 onClick={() => setQuantiety(quantiety + 1)}
                               >
@@ -188,7 +189,7 @@ export default function CartItems() {
                               >
                                 <RemoveIcon fontSize="small" />
                               </span> */}
-                          {/* </Box>{" "}
+            {/* </Box>{" "}
                         </Box>
                       </Box>
                     </StyledTableCell>
@@ -198,15 +199,18 @@ export default function CartItems() {
                     </StyledTableCell>
                   </StyledTableRow>
                 ))} */}
-            </Table>
-          </TableContainer>
-          <Box className={classes.totalbox}>
-            <span style={{ fontSize: "22px", padding: "10px" }}>
-              Grand total
-            </span>
-            <span style={{ fontSize: "22px", padding: "10px" }}>{total}</span>
-          </Box>
+          </Table>
+        </TableContainer>
+        <Box className={classes.totalbox}>
+          <span style={{ fontSize: "22px", padding: "10px" }}>Grand total</span>
+          <span style={{ fontSize: "22px", padding: "10px" }}>{total}</span>
+          <Button>
+            <Link to="/viewproduct/shippingaddres" style={{ color: "#fff" }}>
+              ShippingOrder
+            </Link>
+          </Button>
         </Box>
+      </Box>
       {/* )} */}
     </>
   );

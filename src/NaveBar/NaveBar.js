@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Box } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -11,14 +11,17 @@ import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { useHistory } from "react-router-dom";
+import {useSelector } from 'react-redux';
 
 // .........Drawer........./////
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
+// import List from "@material-ui/core/List";
+// import Divider from "@material-ui/core/Divider";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import MailIcon from "@material-ui/icons/Mail";
 
 import { Link } from "react-router-dom";
 
@@ -111,14 +114,38 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  Menubox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
 }));
 
 const NaveBar = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [isLogin, setIslogin] = useState(false);
+  // const { typeuser, setTypeuser } = useState('');
+  const history = useHistory();
+  const counter = useSelector(
+    (data) => data.counter
+    // console.log("counter data is recive ", data.counter)
+  );
+
+  console.log("coutwer data is ",counter);
+
+  const [state, setState] = useState({
     top: false,
   });
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -131,6 +158,15 @@ const NaveBar = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (user) {
+      console.log("this is localstorige user", user);
+      setIslogin(true);
+    } else {
+      setIslogin(false);
+    }
+  }, [user]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -154,9 +190,9 @@ const NaveBar = () => {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -187,64 +223,97 @@ const NaveBar = () => {
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <div>
-          <Button
-            className={classes.mobilelink}
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            Dishes
-          </Button>
-        </div>
-      </MenuItem>
-      <MenuItem>
-        <Button color="inherit" onClick={handleMenuClose}>
-          <Link className={classes.mobilelink} to="/">
-            Home
-          </Link>
-        </Button>
-      </MenuItem>
-      <MenuItem>
-        <Button color="inherit" onClick={handleMenuClose}>
-          <Link className={classes.mobilelink} to="/about">
-            About
-          </Link>
-        </Button>
-      </MenuItem>
-      <MenuItem>
-        <Button color="inherit" onClick={handleMenuClose}>
-          <Link className={classes.mobilelink} to="/contactus">
-            ContactUs
-          </Link>
-        </Button>
-      </MenuItem>
-      <MenuItem>
-        <Button color="inherit" onClick={handleMenuClose}>
-          <Link className={classes.mobilelink} to="/sellerportal">
-            Become a seller/buyer
-          </Link>
-        </Button>
-      </MenuItem>
+      {isLogin ? (
+        <>
+          <MenuItem>
+            <Button color="inherit" onClick={handleMenuClose}>
+              <Link className={classes.mobilelink} to="/">
+                Home
+              </Link>
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            <div>
+              <Button
+                className={classes.mobilelink}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                Dishes
+              </Button>
+            </div>
+          </MenuItem>
+          <MenuItem>
+            <Button color="inherit" onClick={handleMenuClose}>
+              <Link className={classes.mobilelink} to="/about">
+                About
+              </Link>
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            <Button color="inherit" onClick={handleMenuClose}>
+              <Link className={classes.mobilelink} to="/contactus">
+                ContactUs
+              </Link>
+            </Button>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem>
+            <Button color="inherit" onClick={handleMenuClose}>
+              <Link className={classes.mobilelink} to="/">
+                Home
+              </Link>
+            </Button>
+          </MenuItem>
 
-      <MenuItem>
-        {" "}
-        <Button color="inherit" onClick={handleMenuClose}>
-          <Link className={classes.mobilelink} to="/login">
-            Login
-          </Link>
-        </Button>
-      </MenuItem>
+          <MenuItem>
+            <Button color="inherit" onClick={handleMenuClose}>
+              <Link className={classes.mobilelink} to="/sellerportal">
+                Become a seller/buyer
+              </Link>
+            </Button>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
   const ref = React.createRef();
+  const [Profile, setProfile] = useState(null);
+
+  const open = Boolean(Profile);
+
+  const handleMenu = (event) => {
+    setProfile(event.currentTarget);
+  };
+  const handleCloseprofile = () => {
+    setProfile(null);
+  };
+  const loginprofile = () => {
+    history.push("/login");
+    setProfile(null);
+  };
+  const logoutprofile = () => {
+    localStorage.removeItem("user");
+    history.push("/login");
+    setProfile(null);
+  };
+  const sellerprofile = () => {
+    setProfile(null);
+    history.push("/login");
+  };
+  const adminprofile = () => {
+    setProfile(null);
+    history.push("/login");
+  };
 
   return (
     <div className={classes.grow}>
@@ -258,7 +327,11 @@ const NaveBar = () => {
               aria-label="open drawer"
             >
               <Link to="/">
-                <img src="/images/simple-house-logo.png" alt="logo not found" />
+                <img
+                  src="/webicon.jpeg"
+                  alt="logo not found"
+                  style={{ width: "100px", height: "80px" }}
+                />
               </Link>{" "}
               {/* <MenuIcon /> */}
             </IconButton>
@@ -277,48 +350,61 @@ const NaveBar = () => {
             </div>
           </div>
           <div className={classes.sectionDesktop}>
-            <div>
-              <Button
-                className={classes.Menu}
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                Dishes
-              </Button>
-            </div>
+            {isLogin ? (
+              <>
+                <Button color="inherit">
+                  <Link className={classes.link} to="/">
+                    Home
+                  </Link>
+                </Button>
 
-            <Button color="inherit">
-              <Link className={classes.link} to="/">
-                Home
-              </Link>
-            </Button>
-            <Button color="inherit">
-              <Link className={classes.link} to="/about">
-                About
-              </Link>
-            </Button>
-            <Button color="inherit">
-              <Link className={classes.link} to="/contactus">
-                ContactUs
-              </Link>
-            </Button>
-            <Button color="inherit">
-              <Link className={classes.link} to="/sellerportal">
-                Become a seller/buyer
-              </Link>
-            </Button>
+                <div>
+                  <Button
+                    className={classes.Menu}
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    Dishes
+                  </Button>
+                </div>
+                <Button color="inherit">
+                  <Link className={classes.link} to="/about">
+                    About
+                  </Link>
+                </Button>
+                <Button color="inherit">
+                  <Link className={classes.link} to="/contactus">
+                    ContactUs
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color="inherit">
+                  <Link className={classes.link} to="/">
+                    Home
+                  </Link>
+                </Button>
 
-            <Button color="inherit">
-              <Link className={classes.link} to="/login">
-                Login
-              </Link>
-            </Button>
-            <Button color="inherit">
+                <Button color="inherit">
+                  <Link className={classes.link} to="/sellerportal">
+                    Become a seller/buyer
+                  </Link>
+                </Button>
+
+                {/* <Button color="inherit">
+                <Link className={classes.link} to="/login">
+                  Login
+                </Link>
+              </Button> */}
+              </>
+            )}
+            {/* <Button color="inherit">
               <Link className={classes.link} to="/signup">
                 Signup
               </Link>
-            </Button>
+            </Button> */}
           </div>
           {/* ............. */}
           <div className={classes.sectionMobile}>
@@ -332,16 +418,53 @@ const NaveBar = () => {
               <MoreIcon />
             </IconButton>
           </div>
-          <div>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Link to="cartproducts">
-                <Badge badgeContent={1} color="secondary">
-                  <AddShoppingCartIcon />
-                </Badge>
-              </Link>
-            </IconButton>
-            {/* <p >Cart</p> */}
-          </div>
+          {/* ...................... */}
+          <Box className={classes.Menubox}>
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                id={menuId}
+                open={open}
+                onClose={handleCloseprofile}
+              >
+                {localStorage.getItem("user") ? (
+                  <MenuItem onClick={logoutprofile}>logout</MenuItem>
+                ) : (
+                  <MenuItem onClick={loginprofile}>login</MenuItem>
+                )}
+                {/* {user.type==='seller' ?
+                  <MenuItem onClick={sellerprofile}>My account</MenuItem> :
+                  <MenuItem onClick={adminprofile}>My account</MenuItem>} */}
+              </Menu>
+            </div>
+
+            <div>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Link to="/cartproducts">
+                  <Badge badgeContent={counter} color="secondary">
+                    <AddShoppingCartIcon />
+                  </Badge>
+                </Link>
+              </IconButton>
+            </div>
+          </Box>
 
           {/* ............. */}
         </Toolbar>

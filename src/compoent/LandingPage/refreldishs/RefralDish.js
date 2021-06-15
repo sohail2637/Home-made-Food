@@ -14,7 +14,10 @@ import StarIcon from "@material-ui/icons/Star";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { incrementCart } from "../../../redux/action";
+// import FetchCartData from "../../../assets/data-file";
+// import LocalForAge from "localforage";
 
 const useStyles = makeStyles((theme) => ({
   card1: {
@@ -69,9 +72,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
   },
 }));
-const RefrelsDish = () => {
+const Reaqumended = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const settings = {
     dots: true,
     infinite: false,
@@ -92,7 +95,7 @@ const RefrelsDish = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -112,91 +115,211 @@ const RefrelsDish = () => {
     <div style={{ width: "80%", margin: "auto" }}>
       <h1> DEAL OF THE DAY</h1>
       <Slider {...settings}>
-        {/* {FetchCartData.map((item) => {
-          return ( */}
+        {/* {FetchCartData.map((item) => { */}
+        {/* return ( */}
         <div>
-          <Box className={classes.card1}>
-            <Box className={classes.imagebox}>
-              <Link to={`/viewproduct/`}>
-                <img
-                  src="/images/gallery/01.jpg"
-                  style={{ width: "100%", height: "250px" }}
-                />
-              </Link>
-            </Box>
+          {/* <Box className={classes.card1}>
+                <Box className={classes.imagebox}>
+                  <Link to={`/viewproduct/${item.id}`}>
+                    <img
+                      src={item.image}
+                      style={{ width: "100%", height: "250px" }}
+                    />
+                  </Link>
+                </Box>
 
-            <Box className={classes.desbox}>
-              {/* <Box className={classes.hoverbtn} id='viewbtn' > 
+                <Box className={classes.desbox}> */}
+          {/* <Box className={classes.hoverbtn} id='viewbtn' > 
                 <Button>Quick view</Button>
               </Box> */}
-              <Typography variant="h6">product</Typography>
-              <Box className={classes.reviewbox}>
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />{" "}
-                <Typography style={{ color: "black" }}>
-                  {" "}
-                  &nbsp; &nbsp; Reviews
-                </Typography>
-              </Box>
-              <Box style={{ display: "flex" }}>
-                <Typography variant="body1" style={{ color: "black" }}>
-                  Rs: &nbsp;&nbsp;
-                </Typography>
-                <Typography variant="body1" style={{ color: "#21bf21" }}>
-                  0.00
-                </Typography>
-              </Box>
-              <Box className={classes.buttonbox}>
-                <CardActions>
-                  <IconButton
-                    aria-label="add to favorites"
-                    style={{
-                      border: "1px solid #94a196",
-                      backgroundColor: "#fff",
-                    }}
-                  >
-                    <FavoriteIcon style={{ color: "#eb2636" }} />
-                  </IconButton>
+          {/* <Typography variant="h6">{item.name}</Typography>
+                  <Box className={classes.reviewbox}>
+                    <StarIcon />
+                    <StarIcon />
+                    <StarIcon />
+                    <StarIcon />
+                    <StarIcon />{" "}
+                    <Typography style={{ color: "black" }}>
+                      {" "}
+                      &nbsp; &nbsp; Reviews
+                    </Typography>
+                  </Box>
+                  <Box style={{ display: "flex" }}>
+                    <Typography variant="body1" style={{ color: "black" }}>
+                      Rs: &nbsp;&nbsp;
+                    </Typography>
+                    <Typography variant="body1" style={{ color: "#21bf21" }}>
+                      {item.price}
+                    </Typography>
+                  </Box>
+                  <Box className={classes.buttonbox}>
+                    <CardActions>
+                      <IconButton
+                        aria-label="add to favorites"
+                        style={{
+                          border: "1px solid #94a196",
+                          backgroundColor: "#fff",
+                        }}
+                      >
+                        <FavoriteIcon style={{ color: "#eb2636" }} />
+                      </IconButton>
 
-                  <Button
-                    size="medium"
-                    variant="contained"
-                    style={{
-                      backgroundColor: "#fff",
-                      fontSize: "1.3rem",
-                      border: "1px solid #94a196",
-                      borderRadius: "25px",
-                      color: "#22a135",
-                    }}
-                    // onClick={() => {
-                    //   dispatch(incrementCart({ productId: item.id }));
-                    // }}
-                  >
-                    Add to cart
-                  </Button>
-                  <IconButton
-                    aria-label="add to favorites"
-                    style={{
-                      border: "1px solid #94a196",
-                      backgroundColor: "#fff",
-                      color: "#22a135",
-                    }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </CardActions>
-              </Box>
-            </Box>
-          </Box>
+                      <Button
+                        size="medium"
+                        variant="contained"
+                        style={{
+                          backgroundColor: "#fff",
+                          fontSize: "1.3rem",
+                          border: "1px solid #94a196",
+                          borderRadius: "25px",
+                          color: "#22a135",
+                        }}
+                        onClick={() => {
+                          dispatch(incrementCart({ productId: item.id }));
+                        }}
+                      >
+                        Add to cart
+                      </Button>
+                      <IconButton
+                        aria-label="add to favorites"
+                        style={{
+                          border: "1px solid #94a196",
+                          backgroundColor: "#fff",
+                          color: "#22a135",
+                        }}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </CardActions>
+                  </Box>
+                </Box>
+              </Box> */}
+
+          <div className="col-md-4 carditem">
+            <Link to="viewproduct">
+              <div className="product-item">
+                <a href="#">
+                  <img src="/images/gallery/02.jpg" alt />
+                </a>
+                <div className="down-content ">
+                  <div className="cardTitle">
+                    <a href="#">
+                      <h4>Tittle title Tittle</h4>
+                    </a>
+                    <h6>$25.75</h6>
+                  </div>
+                  <p>
+                    Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                    corporis nulla aspernatur.
+                  </p>
+                  <ul className="stars">
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                  </ul>
+                  <span>Reviews (21)</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="col-md-4 carditem">
+            <Link to="viewproduct">
+              <div className="product-item">
+                <a href="#">
+                  <img src="/images/gallery/02.jpg" alt />
+                </a>
+                <div className="down-content ">
+                  <div className="cardTitle">
+                    <a href="#">
+                      <h4>Tittle title Tittle</h4>
+                    </a>
+                    <h6>$25.75</h6>
+                  </div>
+                  <p>
+                    Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                    corporis nulla aspernatur.
+                  </p>
+                  <ul className="stars">
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                  </ul>
+                  <span>Reviews (21)</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="col-md-4 carditem">
+            <Link to="viewproduct">
+              <div className="product-item">
+                <a href="#">
+                  <img src="/images/gallery/02.jpg" alt />
+                </a>
+                <div className="down-content ">
+                  <div className="cardTitle">
+                    <a href="#">
+                      <h4>Tittle title Tittle</h4>
+                    </a>
+                    <h6>$25.75</h6>
+                  </div>
+                  <p>
+                    Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+                    corporis nulla aspernatur.
+                  </p>
+                  <ul className="stars">
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                    <li>
+                      <i className="fa fa-star" />
+                    </li>
+                  </ul>
+                  <span>Reviews (21)</span>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
-        );
+        {/* ); */}
         {/* })} */}
       </Slider>
     </div>
   );
 };
 
-export default RefrelsDish;
+export default Reaqumended;

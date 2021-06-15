@@ -6,6 +6,7 @@ import RefrelsDish from "./refreldishs/RefralDish";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Reaqumended from "./refreldishs/RefralDish";
 
 const LandingPage = () => {
   const settings = {
@@ -28,7 +29,7 @@ const LandingPage = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -47,7 +48,7 @@ const LandingPage = () => {
   return (
     <div>
       {/* Banner Starts Here */}
-      <div className="banner header-text">
+      {/* <div className="banner header-text">
         <div className="owl-banner owl-carousel">
           <div className="banner-item-01">
             <div className="text-content">
@@ -68,9 +69,9 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </div>
-
+      </div> */}
       {/* Banner Ends Here */}
+{/* <Reaqumended/> */}
       {/* Display Card start */}
       <div className="cardcontainer">
         <div className="latest-products">
@@ -78,9 +79,9 @@ const LandingPage = () => {
             <div className="col-md-12">
               <div className="section-heading">
                 <h2>Latest Meal</h2>
-                <a href="products.html">
+                <Link href="products.html">
                   view all products <i className="fa fa-angle-right" />
-                </a>
+                </Link>
               </div>
             </div>
             <div

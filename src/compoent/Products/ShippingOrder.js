@@ -5,13 +5,15 @@ import {
   Container,
   Typography,
   Button,
-  Box,OutlinedInput,
+  Box,
+  OutlinedInput,
   TextareaAutosize,
   Input,
 } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
-// import MuiPhoneNumber from "material-ui-phone-number";
+import { useDispatch } from "react-redux";
+// import { shippingdata } from "../../redux/reducers/action";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,9 +94,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   boxContainer: {
-    width: "auto",
+    width: "450px",
     height: "auto",
     border: "1px solid #f33f3f",
+    textAlign:'left',
     marginTop: "1rem",
     padding: "1rem",
     [theme.breakpoints.down("md")]: {
@@ -120,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShippingOrder = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     Fullname: "",
     email: "",
@@ -141,6 +145,7 @@ const ShippingOrder = () => {
     event.preventDefault();
     console.log(state);
     const data = state;
+    // dispatch(shippingdata());
 
     // axios
     //   .post("/signup", data)
@@ -263,11 +268,13 @@ const ShippingOrder = () => {
             <Grid item xs={12} lg={6} className={classes.navBarContainer}>
               <div className={classes.RegisterContent}>
                 <Box>
-                  {" "}
-                  <img src="/images/gallery/03.jpg"  className={classes.uplodimg} />
+                  <img
+                    src="/images/gallery/03.jpg"
+                    className={classes.uplodimg}
+                  />
                 </Box>
                 <Box>
-                  <Typography variant="h6">Chikankri</Typography>
+                  <Typography variant="h6">{state.Fullname}</Typography>
                 </Box>
                 <Box className={classes.boxContainer}>
                   <Typography
@@ -277,8 +284,41 @@ const ShippingOrder = () => {
                       color: "#232323",
                     }}
                   >
-                    Total:&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style={{ color: "#f33f3f" }}>0.56</span>
+                    MobilNumber :&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{ color: "#f33f3f" }}>
+                      {state.mobileNumber}
+                    </span>
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    style={{
+                      fontFamily: "Spartan",
+                      color: "#232323",
+                    }}
+                  >
+                    Postal code :&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{ color: "#f33f3f" }}>{state.postalcode}</span>
+                  </Typography>
+
+                  <Typography
+                    variant="h5"
+                    style={{
+                      fontFamily: "Spartan",
+                      color: "#232323",
+                    }}
+                  >
+                    Email :&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{ color: "#f33f3f" }}>{state.email}</span>
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    style={{
+                      fontFamily: "Spartan",
+                      color: "#232323",
+                    }}
+                  >
+                    Address :&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{ color: "#f33f3f" }}>{state.address}</span>
                   </Typography>
                 </Box>
               </div>

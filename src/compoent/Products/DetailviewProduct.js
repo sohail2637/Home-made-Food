@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -9,7 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { Grid, Box, Divider, Icon, Button } from "@material-ui/core";
+import { Grid, Box, Divider, Icon, Button, Input } from "@material-ui/core";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -21,6 +21,7 @@ import { addtocart } from "../../redux/reducers/action";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Label } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,14 +93,20 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailViewProduct() {
   const classes = useStyles();
   const history = useHistory();
-
   const { productId } = useParams();
-
+  const [quantiety, setQuantiety] = useState(1);
   const [expanded, setExpanded] = React.useState(false);
   const dispatch = useDispatch();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const changquality = (e) => {
+    if (e.target.value > 0) {
+      setQuantiety(e.target.value);
+    } else {
+      setQuantiety(1);
+    }
   };
   var settings = {
     dots: true,
@@ -178,9 +185,9 @@ export default function DetailViewProduct() {
                     borderRadius: "25px",
                   }}
                   className={classes.button}
-                  onClick={() => dispatch(addtocart())}
+                  onClick={() => dispatch(addtocart(quantiety))}
                 >
-                  <Link to="/viewproduct/shippingaddres" style={ {color:'#fff'}}>Add to Cart</Link>
+                  Add to Cart
                 </Button>
               </CardActions>
             </Card>
@@ -193,14 +200,22 @@ export default function DetailViewProduct() {
             </Box>
             <Typography variant="h4">Dishes</Typography>
             <Divider style={{ backgroundColor: "#ddd", margin: "10px 0px" }} />
-            <Box className={classes.reviewBox}>
+            {/* <Box className={classes.reviewBox}>
               <StarBorderIcon style={{ color: "#f33f3f" }} />
               <StarBorderIcon style={{ color: "#f33f3f" }} />
               <StarBorderIcon style={{ color: "#f33f3f" }} />
               <StarBorderIcon style={{ color: "#f33f3f" }} />
               <StarBorderIcon style={{ color: "#f33f3f" }} />
               <Typography variant="h6">reviews</Typography>
-            </Box>
+            </Box> */}
+            <span>Quantitey&nbsp;&nbsp;</span>
+
+            <Input
+              variant="outlined"
+              type="number"
+              value={quantiety}
+              onChange={(e) => changquality(e)}
+            />
             <Typography variant="h5" className={classes.reviewBox}>
               {" "}
               Price Rs:&nbsp;&nbsp;12333

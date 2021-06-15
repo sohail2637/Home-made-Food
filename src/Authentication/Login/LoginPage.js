@@ -1,11 +1,14 @@
-import React from "react";
-// import AuthNavbar from "../Header";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Container, Typography, Button, Box } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-// import ReCAPTCHA from "react-google-recaptcha";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import swal from "sweetalert";
+
+import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -116,6 +119,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = () => {
   const classes = useStyles();
+  const history = useHistory();
+  // const dispatch = useDispatch();
+  const [token, setToken] = useState("");
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -131,9 +137,45 @@ const LoginPage = () => {
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
-    axios.post("/login", state).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post("/login", state)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.token) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          switch (res.data.type) {
+            case "seller":
+              history.push("/seller");
+              return;
+            case "buyer":
+              history.push("/");
+              return;
+            case "delivery boy":
+              swal(
+                "now you are part of our team . we  contact with you itself for your services"
+              );
+
+              history.push("/");
+              return;
+            case "admin":
+              history.push("/admin");
+              return;
+          }
+          setToken(res.token);
+          // history.push("/");
+        } else {
+          console.log(res.data.msg);
+          if (res.data.msg === "please signUp first") {
+            swal(res.data.msg);
+          } else if (res.data.msg === "please give correct email or password") {
+            swal(res.data.msg);
+          }
+
+          // const notify = () => toast(res.data.msg);
+          // notify();
+        }
+      })
+      .then((error) => console.log(error));
   };
   return (
     <div>
@@ -166,7 +208,6 @@ const LoginPage = () => {
                   variant="h6"
                   style={{ marginTop: "1rem", textAlign: "left" }}
                 >
-                  {" "}
                   <label for="fname" className={classes.inputLbel}>
                     Password
                   </label>

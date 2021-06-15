@@ -10,13 +10,14 @@ import {
   FormControl,
   Select,
 } from "@material-ui/core";
-// import FormControl from "@material-ui/core/FormControl";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
-
+import { sellerpost } from "../../../redux/reducers/action";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -134,6 +135,7 @@ const useStyles = makeStyles((theme) => ({
 const AddProducts = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     DishName: "",
     Price: 0.0,
@@ -162,23 +164,32 @@ const AddProducts = () => {
       });
     }
   };
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
   const submationform = (event) => {
     event.preventDefault();
     console.log(state);
-    // const data = state;
-    // const formdata = new FormData();
-    // formdata.append("FirstName", state.Firstname);
-    // formdata.append("LastName", state.LastName);
-    // formdata.append("UserName", state.userName);
-    // formdata.append("email", state.email);
-    // formdata.append("MobileNumber", state.mobileNumber);
-    // formdata.append("Password", state.password);
-    // formdata.append("Type", state.type);
-    // formdata.append("Image", state.image);
-    // axios
-    //   .post("/signup", formdata)
-    //   .then((res) => console.log("api respons: ", res));
-    history.push("/seller");
+    const data = state;
+
+    const formdata = new FormData();
+    formdata.append("FirstName", state.Firstname);
+    formdata.append("LastName", state.LastName);
+    formdata.append("UserName", state.userName);
+    formdata.append("email", state.email);
+    formdata.append("MobileNumber", state.mobileNumber);
+    formdata.append("Password", state.password);
+    formdata.append("Type", state.type);
+    formdata.append("Image", state.image);
+
+    axios
+      .post("/addproduct", formdata, config)
+      .then((res) => {
+        swal(res);
+        dispatch(sellerpost(state));
+        // history.push("/seller");
+      })
+      .catch((error) => swal(error));
   };
   return (
     <div>
@@ -190,7 +201,6 @@ const AddProducts = () => {
             </Box>
             </Grid> */}
           <Grid item xs={12} lg={6} className={classes.formContainer}>
-
             <Container maxWidth="md">
               <form onSubmit={submationform}>
                 {/* .......image upload....... */}

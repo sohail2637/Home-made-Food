@@ -101,7 +101,7 @@ myApp.post("/login", async function (req, res) {
     );
   } else {
     res.json({
-      msg: "User Not Found",
+      msg: "please signUp first",
     });
   }
 });
