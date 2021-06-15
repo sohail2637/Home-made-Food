@@ -4,10 +4,10 @@ let myApp = express();
 myApp.use(cors());
 let fs = require("fs");
 let path = require("path");
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('maano');
-var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
+// const Cryptr = require('cryptr');
+// const cryptr = new Cryptr('maano');
+// var bcrypt = require('bcryptjs');
+// var salt = bcrypt.genSaltSync(10);
 
 var multer = require("multer");
 
@@ -22,6 +22,8 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage });
+var nodemailer = require('nodemailer');
+
 
 let BodyParser = require("body-parser");
 myApp.use(BodyParser.json());
@@ -29,6 +31,33 @@ myApp.use(BodyParser.json());
 let config = require("./config");
 let jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
+
+
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, 
+  // service: 'gmail',
+  auth: {
+    user: 'nabiha3802izhar@gmail.com',
+    pass: '137287nabiha'
+  }
+});
+
+var mailOptions = {
+  from: 'nabiha3802izhar@gmail.com',
+  to: 'sohail25816@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
 
 let mongoose = require("mongoose");
 let SiteUsers = require(".//db/models/users");
@@ -79,16 +108,15 @@ myApp.post("/signup", upload.single("image"), async function (req, res) {
       (user.type = req.body.Type),
       req.file
         ? (user.sellerimage = req.file.originalname)
-        : (user.sellerimage = "");
+        : (user.sellerimage = ""),
+      user.deliverycontact = req.body.deliverycontact,
+      user.address = req.body.address,
+      user.postalcode = req.body.postalcode;
     await user.save();
     res.json({
       msg: "Nabiha",
     });
   }
-
-
-
-
 
   // const encryptedString = cryptr.encrypt(req.body.password);
   // const decryptedString = cryptr.decrypt(encryptedString);
@@ -109,8 +137,8 @@ myApp.post("/login", async function (req, res) {
     console.log(decoded)
     if (decoded.password == req.body.password) {
       console.log('Password')
-    
-      let userToken = { id: docs._doc._id};
+
+      let userToken = { id: docs._doc._id };
       jwt.sign(
         userToken,
         config.secret,
@@ -139,7 +167,7 @@ myApp.post("/login", async function (req, res) {
     }
   });
 
-  
+
 
 
 });
@@ -154,10 +182,30 @@ myApp.post("/postproduct", upload.single("dishImage"), async function (req, res)
     (dish.dishImage = req.file.originalname);
   await dish.save();
   res.json({
-    msg: "Nabiha",
+    msg: "Dish Saved",
   });
 }
 );
+myApp.post('/dishes', async function (req, res) {
+  Dish.find({}, function (err, dishes) {
+      res.send(dishes);
+  });
+})
+myApp.post('/showsellers', async function (req, res) {
+  SiteUsers.find({type: 'seller'}, function (err, sellers) {
+      res.send(sellers);
+  });
+})
+myApp.post('/showdeliveryboys', async function (req, res) {
+  SiteUsers.find({type: 'delivery boy'}, function (err, deliveryboys) {
+      res.send(deliveryboys);
+  });
+})
+myApp.post('/sellerpost', async function (req, res) {
+  Dish.find({referenceId: req.body.id}, function (err, sellerpost) {
+      res.send(sellerpost);
+  });
+})
 myApp.use(express.static("./server/allData/uploads"));
 // myApp.use(express.static('./server/build'))
 
