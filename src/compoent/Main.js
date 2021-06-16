@@ -51,7 +51,7 @@ const Main = () => {
         />
         {/* seller dashboard....... */}
         <Route path="/seller" exact component={Seller} />
-        <Route path="/addproduct" component={AddProducts} />
+        <Route path="/postproduct" component={AddProducts} />
         <Route path="/cartproducts" component={CartItems} />
         <Route path="/admin" component={AdminPanal} />
         <Route path="/aboutseller" component={DetailsSeller} />

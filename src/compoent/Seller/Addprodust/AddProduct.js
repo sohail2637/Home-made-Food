@@ -137,11 +137,13 @@ const AddProducts = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [state, setState] = React.useState({
+    id: "12",
     DishName: "",
     Price: 0.0,
     quantity: "sigle plate",
     descraption: "",
     image: "",
+    dishCategory: "",
   });
 
   const handleChange = (event) => {
@@ -173,23 +175,24 @@ const AddProducts = () => {
     const data = state;
 
     const formdata = new FormData();
-    formdata.append("FirstName", state.Firstname);
-    formdata.append("LastName", state.LastName);
-    formdata.append("UserName", state.userName);
-    formdata.append("email", state.email);
-    formdata.append("MobileNumber", state.mobileNumber);
-    formdata.append("Password", state.password);
-    formdata.append("Type", state.type);
-    formdata.append("Image", state.image);
-
+    formdata.append("id", state.id);
+    formdata.append("dishName", state.DishName);
+    formdata.append("dishPrize", state.Price);
+    formdata.append("dishQuantity", state.quantity);
+    formdata.append("dishCategory", state.dishCategory);
+    formdata.append("dishImage", state.image)
     axios
-      .post("/addproduct", formdata, config)
+      .post("/postproduct", formdata, config)
       .then((res) => {
         swal(res);
         dispatch(sellerpost(state));
+        console.log(res);
         // history.push("/seller");
       })
-      .catch((error) => swal(error));
+      .catch(
+        (error) => console.log(error)
+        // swal(error)
+      );
   };
   return (
     <div>

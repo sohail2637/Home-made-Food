@@ -50,7 +50,7 @@ const Seller = () => {
             <div className="col-md-12">
               <div className="section-heading">
                 <h2>Your Post</h2>
-                <Link to="/addproduct">
+                <Link to="/postproduct">
                   <h3>
                     Add Post <i className="fa fa-angle-right" />
                   </h3>
