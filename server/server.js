@@ -167,39 +167,6 @@ myApp.post("/login", async function (req, res) {
     }
   );
 
-<<<<<<< HEAD
-  if (user) {
-    let userToken = { id: user._id };
-    jwt.sign(
-      userToken,
-      config.secret,
-      {
-        expiresIn: "6d",
-      },
-      (err, token) => {
-        res.json({
-          token,
-          success: true,
-          msg: "User Found",
-          _id: user._id,
-          username: user.username,
-          password: user.password,
-          email: user.email,
-          contact: user.contact,
-          type: user.type,
-          Image: user.sellerimage,
-        });
-      }
-    );
-  } else {
-    res.json({
-      msg: "please signUp first",
-    });
-  }
-=======
-
-       
->>>>>>> 1fcea856222c8169a003314d066270d42589943e
 });
 myApp.post(
   "/postproduct",
